@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Gallery Hero -->
+<section class="hero-section" style="padding: 3rem 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 mx-auto hero-content text-center">
+                <h1 class="display-5 fw-bold hero-animated">{{ content[lang]['gallery_title'] }}</h1>
+                <p class="lead hero-animated">{{ content[lang]['gallery_intro'] }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Grid -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            {% for image in gallery_images %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="gallery-item animate-on-scroll">
+                        <img src="{{ image.source }}" class="img-fluid" alt="{{ image['description_' + lang] }}">
+                        <div class="gallery-caption">
+                            <p class="mb-0">{{ image['description_' + lang] }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Vietnam Today Section -->
+<section class="py-5 bg-dark">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h2>{% if lang == 'vi' %}Việt Nam Hôm Nay{% else %}Vietnam Today{% endif %}</h2>
+                <p class="lead">
+                    {% if lang == 'vi' %}
+                    Sau hơn bốn thập kỷ kể từ Ngày Giải phóng, Việt Nam đã có những bước phát triển vượt bậc.
+                    {% else %}
+                    Over four decades after Liberation Day, Vietnam has made remarkable progress.
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Economic Development -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title h5">
+                            <i class="fas fa-chart-line me-2"></i>
+                            {% if lang == 'vi' %}Phát triển Kinh tế{% else %}Economic Development{% endif %}
+                        </h3>
+                        <p class="card-text">
+                            {% if lang == 'vi' %}
+                            Từ một đất nước nghèo khó sau chiến tranh, Việt Nam đã trở thành một trong những nền kinh tế phát triển nhanh nhất khu vực Đông Nam Á, với tốc độ tăng trưởng GDP ổn định.
+                            {% else %}
+                            From a poor post-war country, Vietnam has become one of the fastest-growing economies in Southeast Asia, with stable GDP growth.
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- International Integration -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title h5">
+                            <i class="fas fa-globe me-2"></i>
+                            {% if lang == 'vi' %}Hội nhập Quốc tế{% else %}International Integration{% endif %}
+                        </h3>
+                        <p class="card-text">
+                            {% if lang == 'vi' %}
+                            Việt Nam đã trở thành thành viên tích cực của nhiều tổ chức quốc tế như ASEAN, APEC, WTO và đã thiết lập quan hệ ngoại giao với hầu hết các quốc gia trên thế giới.
+                            {% else %}
+                            Vietnam has become an active member of many international organizations such as ASEAN, APEC, WTO, and has established diplomatic relations with most countries in the world.
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cultural Preservation -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title h5">
+                            <i class="fas fa-landmark me-2"></i>
+                            {% if lang == 'vi' %}Bảo tồn Văn hóa{% else %}Cultural Preservation{% endif %}
+                        </h3>
+                        <p class="card-text">
+                            {% if lang == 'vi' %}
+                            Trong quá trình phát triển và hiện đại hóa, Việt Nam vẫn duy trì và bảo tồn bản sắc văn hóa độc đáo của mình, với nhiều di sản văn hóa vật thể và phi vật thể được UNESCO công nhận.
+                            {% else %}
+                            In the process of development and modernization, Vietnam still maintains and preserves its unique cultural identity, with many tangible and intangible cultural heritages recognized by UNESCO.
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Annual Celebration Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h2>{{ content[lang]['annual_celebration'] }}</h2>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title h5">
+                            <i class="fas fa-flag me-2"></i>
+                            {% if lang == 'vi' %}Lễ kỷ niệm chính thức{% else %}Official Celebrations{% endif %}
+                        </h3>
+                        <p class="card-text">
+                            {% if lang == 'vi' %}
+                            Mỗi năm vào ngày 30 tháng 4, lễ kỷ niệm chính thức được tổ chức trên toàn quốc, đặc biệt là tại Thành phố Hồ Chí Minh và Hà Nội. Các hoạt động bao gồm diễu hành quân sự, trình diễn văn hóa, và lễ đặt hoa tại các đài tưởng niệm.
+                            {% else %}
+                            Every year on April 30, official celebrations are held nationwide, especially in Ho Chi Minh City and Hanoi. Activities include military parades, cultural performances, and laying wreaths at memorials.
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title h5">
+                            <i class="fas fa-users me-2"></i>
+                            {% if lang == 'vi' %}Hoạt động Cộng đồng{% else %}Community Activities{% endif %}
+                        </h3>
+                        <p class="card-text">
+                            {% if lang == 'vi' %}
+                            Người dân tham gia vào nhiều hoạt động cộng đồng như hội chợ, triển lãm ảnh lịch sử, chiếu phim tài liệu, và các sự kiện thể thao. Trường học tổ chức các buổi nói chuyện về lịch sử và ý nghĩa của ngày lễ.
+                            {% else %}
+                            People participate in many community activities such as fairs, historical photo exhibitions, documentary screenings, and sporting events. Schools organize talks about the history and significance of the holiday.
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

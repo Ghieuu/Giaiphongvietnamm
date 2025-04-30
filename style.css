@@ -1,0 +1,197 @@
+/* Custom CSS for Vietnam Liberation Day Website */
+
+:root {
+  /* Vietnamese flag colors */
+  --vietnam-red: #da251d;
+  --vietnam-yellow: #ffcd00;
+}
+
+/* Hero section styling */
+.hero-section {
+  background-color: var(--vietnam-red);
+  color: white;
+  padding: 5rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/static/svg/vietnam_flag.svg');
+  background-size: 200px;
+  background-repeat: no-repeat;
+  background-position: right 2rem center;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-subtitle {
+  color: var(--vietnam-yellow);
+  font-weight: bold;
+}
+
+/* Card styling */
+.feature-card {
+  border-left: 4px solid var(--vietnam-red);
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.card-title {
+  color: var(--vietnam-red);
+}
+
+/* Timeline styling */
+.timeline-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.timeline-container::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  background-color: var(--vietnam-red);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -3px;
+}
+
+.timeline-item {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 50%;
+}
+
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  right: -13px;
+  background-color: var(--vietnam-yellow);
+  border: 4px solid var(--vietnam-red);
+  top: 20px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.timeline-left {
+  left: 0;
+}
+
+.timeline-right {
+  left: 50%;
+}
+
+.timeline-left::after {
+  right: -13px;
+}
+
+.timeline-right::after {
+  left: -12px;
+}
+
+.timeline-content {
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-date {
+  color: var(--vietnam-yellow);
+  font-weight: bold;
+}
+
+/* Gallery styling */
+.gallery-item {
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-item img {
+  transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+.gallery-caption {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  color: white;
+}
+
+/* Footer styling */
+.footer {
+  background-color: var(--vietnam-red);
+  color: white;
+  padding: 2rem 0;
+}
+
+/* Language selector */
+.language-selector .dropdown-item.active {
+  background-color: var(--vietnam-red);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .timeline-container::after {
+    left: 31px;
+  }
+  
+  .timeline-item {
+    width: 100%;
+    padding-left: 70px;
+    padding-right: 25px;
+  }
+  
+  .timeline-item::after {
+    left: 18px;
+  }
+  
+  .timeline-right {
+    left: 0;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Animation for the hero text */
+.hero-animated {
+  animation: fadeInUp 1.5s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

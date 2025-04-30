@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duong Kieu Vy</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #f5e9d3;
+            overflow: hidden;
+        }
+        
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        .tank {
+            position: absolute;
+            bottom: 20px;
+            left: -200px;
+            width: 200px;
+            height: 100px;
+            z-index: 3;
+            animation: moveTank 5s linear forwards;
+        }
+        
+        .tank-body {
+            width: 160px;
+            height: 60px;
+            background: linear-gradient(145deg, #5a6e4a, #3a4a2a);
+            position: relative;
+            top: 20px;
+            left: 20px;
+            border-radius: 10px 10px 5px 5px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(0, 0, 0, 0.2);
+            border: 2px solid #333;
+        }
+        
+        .tank-body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 20%), repeating-linear-gradient(45deg, #4a5e3a, #4a5e3a 10px, transparent 10px, transparent 20px);
+            opacity: 0.6;
+            border-radius: 10px 10px 5px 5px;
+        }
+        
+        .tank-hatch {
+            width: 20px;
+            height: 20px;
+            background: #3a4a2a;
+            position: absolute;
+            top: 10px;
+            left: 30px;
+            border-radius: 50%;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+            border: 2px solid #333;
+            z-index: 2;
+        }
+        
+        .tank-exhaust {
+            width: 15px;
+            height: 10px;
+            background: #222;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            border-radius: 3px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.7);
+        }
+        
+        .tank-turret {
+            width: 80px;
+            height: 30px;
+            background: linear-gradient(145deg, #4a5e3a, #2a3a1a);
+            position: absolute;
+            top: -15px;
+            left: 40px;
+            border-radius: 50% 50% 10px 10px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3), inset 0 0 5px rgba(0, 0, 0, 0.2);
+            border: 2px solid #333;
+            z-index: 2;
+        }
+        
+        .tank-barrel {
+            width: 60px;
+            height: 8px;
+            background: #333;
+            position: absolute;
+            top: 11px;
+            left: 80px;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tank-barrel::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            right: -6px;
+            width: 14px;
+            height: 14px;
+            background: #333;
+            border-radius: 50%;
+        }
+        
+        .muzzle-flash {
+            position: absolute;
+            top: -16px;
+            right: -40px;
+            width: 50px;
+            height: 40px;
+            background: radial-gradient(circle, #ffffff 5%, #ffffe0 20%, #ff4500 50%, #ff0000 80%, transparent 90%);
+            opacity: 0;
+            border-radius: 50%;
+            animation: fireFlash 0.5s ease-out 1.5s infinite;
+            z-index: 4;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+        }
+        
+        .smoke-puff-1 {
+            position: absolute;
+            top: -20px;
+            right: -50px;
+            width: 60px;
+            height: 50px;
+            background: radial-gradient(circle, rgba(180, 180, 180, 0.9) 10%, rgba(100, 100, 100, 0.5) 50%, transparent 80%);
+            opacity: 0;
+            border-radius: 50%;
+            animation: smokePuff1 0.8s ease-out 1.5s infinite;
+            z-index: 4;
+        }
+        
+        .smoke-puff-2 {
+            position: absolute;
+            top: -15px;
+            right: -60px;
+            width: 70px;
+            height: 55px;
+            background: radial-gradient(circle, rgba(150, 150, 150, 0.7) 15%, rgba(80, 80, 80, 0.3) 60%, transparent 85%);
+            opacity: 0;
+            border-radius: 50%;
+            animation: smokePuff2 1s ease-out 1.5s infinite;
+            z-index: 4;
+        }
+        
+        .sparks {
+            position: absolute;
+            top: -10px;
+            right: -30px;
+            width: 40px;
+            height: 30px;
+            z-index: 4;
+        }
+        
+        .spark {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffd700;
+            border-radius: 50%;
+            opacity: 0;
+        }
+        
+        .spark1 {
+            animation: sparkMove1 0.6s ease-out 1.5s infinite;
+        }
+        
+        .spark2 {
+            animation: sparkMove2 0.6s ease-out 1.5s infinite;
+        }
+        
+        .spark3 {
+            animation: sparkMove3 0.6s ease-out 1.5s infinite;
+        }
+        
+        @keyframes fireFlash {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) translateX(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5) translateX(15px);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(2) translateX(30px);
+            }
+        }
+        
+        @keyframes smokePuff1 {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) translateX(0);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.8) translateX(20px);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(2.5) translateX(40px);
+            }
+        }
+        
+        @keyframes smokePuff2 {
+            0% {
+                opacity: 0;
+                transform: scale(0.4) translateX(0);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(2) translateX(25px);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(3) translateX(50px);
+            }
+        }
+        
+        @keyframes sparkMove1 {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(20px, -15px) rotate(30deg);
+            }
+        }
+        
+        @keyframes sparkMove2 {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(15px, 10px) rotate(-20deg);
+            }
+        }
+        
+        @keyframes sparkMove3 {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(25px, 0) rotate(10deg);
+            }
+        }
+        
+        .tank-antenna {
+            width: 2px;
+            height: 40px;
+            background: #333;
+            position: absolute;
+            top: -55px;
+            left: 20px;
+            transform: rotate(-15deg);
+        }
+        
+        .tank-antenna::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -2px;
+            width: 6px;
+            height: 6px;
+            background: #ff0000;
+            border-radius: 50%;
+        }
+        
+        .tank-tracks {
+            width: 200px;
+            height: 40px;
+            background: #333;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        .tank-tracks::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient( 90deg, #444, #444 6px, #333 6px, #333 12px);
+            border-radius: 10px;
+        }
+        
+        .tank-wheel {
+            width: 25px;
+            height: 25px;
+            background: #555;
+            border: 4px solid #222;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 7px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5), 0 0 5px rgba(0, 0, 0, 0.3);
+            animation: rollWheel 0.4s linear infinite;
+        }
+        
+        @keyframes rollWheel {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .wheel1 {
+            left: 15px;
+        }
+        
+        .wheel2 {
+            left: 50px;
+        }
+        
+        .wheel3 {
+            left: 85px;
+        }
+        
+        .wheel4 {
+            left: 120px;
+        }
+        
+        .wheel5 {
+            left: 155px;
+        }
+    
+        
+        .soldier {
+            position: absolute;
+            top: -30px;
+            z-index: 5;
+        }
+        
+        .soldier1 {
+            left: 27px;
+        }
+        
+        .soldier2 {
+            left: 47px;
+        }
+        
+        .soldier3 {
+            left: 67px;
+        }
+        
+        .soldier-body {
+            width: 22px;
+            height: 25px;
+            background: linear-gradient(to bottom, #2e7d32 60%, #3a4a2a 100%);
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            border: 1px solid #1b5e20;
+            z-index: 5;
+        }
+        
+        .soldier-head {
+            width: 16px;
+            height: 16px;
+            background: #ffcc80;
+            border-radius: 50%;
+            position: absolute;
+            top: -16px;
+            left: 3px;
+            border: 1px solid #333;
+            box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
+            z-index: 6;
+        }
+        
+        .soldier-hat {
+            width: 20px;
+            height: 9px;
+            background: #2e7d32;
+            position: absolute;
+            top: -23px;
+            left: 1px;
+            border-radius: 3px;
+            border: 1px solid #1b5e20;
+            transform: rotate(-5deg);
+            z-index: 7;
+        }
+        
+        .soldier-arm {
+            width: 9px;
+            height: 16px;
+            background: #2e7d32;
+            position: absolute;
+            top: 3px;
+            border: 1px solid #1b5e20;
+            border-radius: 3px;
+            z-index: 6;
+        }
+        
+        .soldier-arm-left {
+            left: -9px;
+            transform: rotate(45deg);
+        }
+        
+        .soldier-arm-right {
+            right: -9px;
+            transform: rotate(-45deg);
+        }
+        
+        .soldier-rifle {
+            width: 26px;
+            height: 4px;
+            background: #333;
+            position: absolute;
+            top: 6px;
+            left: 22px;
+            transform: rotate(-30deg);
+            border-radius: 2px;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            z-index: 6;
+        }
+        
+        @keyframes moveTank {
+            0% {
+                left: -200px;
+            }
+            100% {
+                left: 100vw;
+            }
+        }
+
+        
+        .image-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            background: url('anh.jpg') no-repeat center center/cover;
+            clip-path: inset(0 100% 0 0);
+            animation: revealImage 5s linear forwards;
+        }
+        
+        @keyframes revealImage {
+            0% {
+                clip-path: inset(0 calc(100vw + 100px) 0 0);
+            }
+            100% {
+                clip-path: inset(0 0 0 0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="tank">
+            <div class="tank-tracks">
+                <div class="tank-wheel wheel1"></div>
+                <div class="tank-wheel wheel2"></div>
+                <div class="tank-wheel wheel3"></div>
+                <div class="tank-wheel wheel4"></div>
+                <div class="tank-wheel wheel5"></div>
+            </div>
+            <div class="tank-body">
+                <div class="tank-hatch"></div>
+                <div class="tank-exhaust"></div>
+                <div class="tank-turret">
+                    <div class="tank-barrel">
+                        <div class="muzzle-flash"></div>
+                        <div class="smoke-puff-1"></div>
+                        <div class="smoke-puff-2"></div>
+                        <div class="sparks">
+                            <div class="spark spark1"></div>
+                            <div class="spark spark2"></div>
+                            <div class="spark spark3"></div>
+                        </div>
+                    </div>
+                    <div class="tank-antenna"></div>
+                </div>
+                <div class="soldier soldier1">
+                    <div class="soldier-body">
+                        <div class="soldier-head"></div>
+                        <div class="soldier-hat"></div>
+                        <div class="soldier-arm soldier-arm-left"></div>
+                        <div class="soldier-arm soldier-arm-right"></div>
+                        <div class="soldier-rifle"></div>
+                    </div>
+                </div>
+                <div class="soldier soldier2">
+                    <div class="soldier-body">
+                        <div class="soldier-head"></div>
+                        <div class="soldier-hat"></div>
+                        <div class="soldier-arm soldier-arm-left"></div>
+                        <div class="soldier-arm soldier-arm-right"></div>
+                        <div class="soldier-rifle"></div>
+                    </div>
+                </div>
+                <div class="soldier soldier3">
+                    <div class="soldier-body">
+                        <div class="soldier-head"></div>
+                        <div class="soldier-hat"></div>
+                        <div class="soldier-arm soldier-arm-left"></div>
+                        <div class="soldier-arm soldier-arm-right"></div>
+                        <div class="soldier-rifle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="image-container"></div>
+    </div>
+    <audio id="cannonSound" src="cannon_shot.mp3"></audio>
+    <script>
+        const cannonSound = document.getElementById('cannonSound');
+        function playCannonSound() {
+            cannonSound.currentTime = 0; 
+            cannonSound.play().catch(error => console.log('Audio play failed:', error));
+        }
+        setInterval(playCannonSound, 1500);
+        playCannonSound();
+    </script>
+</body>
+
+</html>

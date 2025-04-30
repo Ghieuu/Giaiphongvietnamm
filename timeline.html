@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+<style>
+    .timeline-content.highlight {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(255, 205, 0, 0.5);
+        transition: all 0.3s ease;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Timeline Hero -->
+<section class="hero-section" style="padding: 3rem 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 mx-auto hero-content text-center">
+                <h1 class="display-5 fw-bold hero-animated">{{ content[lang]['timeline_title'] }}</h1>
+                <p class="lead hero-animated">{{ content[lang]['timeline_intro'] }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Timeline Filters -->
+<section class="py-4 bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="btn-group" role="group" aria-label="Timeline filters">
+                    <button type="button" class="btn btn-outline-light timeline-filter active" data-filter="all">
+                        {% if lang == 'vi' %}Tất cả{% else %}All{% endif %}
+                    </button>
+                    <button type="button" class="btn btn-outline-light timeline-filter" data-filter="1950">
+                        {% if lang == 'vi' %}Thập niên 1950{% else %}1950s{% endif %}
+                    </button>
+                    <button type="button" class="btn btn-outline-light timeline-filter" data-filter="1960">
+                        {% if lang == 'vi' %}Thập niên 1960{% else %}1960s{% endif %}
+                    </button>
+                    <button type="button" class="btn btn-outline-light timeline-filter" data-filter="1970">
+                        {% if lang == 'vi' %}Thập niên 1970{% else %}1970s{% endif %}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Timeline -->
+<section class="py-5">
+    <div class="container">
+        <div class="timeline-container">
+            {% for event in timeline_events[lang] %}
+                {% set decade = event.date.split('/')[2][:3] + '0' %}
+                {% if loop.index is odd %}
+                    <div class="timeline-item timeline-left animate-on-scroll" data-decade="{{ decade }}">
+                        <div class="timeline-content">
+                            <div class="timeline-date">{{ event.date }}</div>
+                            <h3>{{ event.title }}</h3>
+                            <p>{{ event.description }}</p>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="timeline-item timeline-right animate-on-scroll" data-decade="{{ decade }}">
+                        <div class="timeline-content">
+                            <div class="timeline-date">{{ event.date }}</div>
+                            <h3>{{ event.title }}</h3>
+                            <p>{{ event.description }}</p>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Key Historical Figures -->
+<section class="py-5 bg-dark">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h2>
+                    {% if lang == 'vi' %}Nhân vật Lịch sử Quan trọng{% else %}Key Historical Figures{% endif %}
+                </h2>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Ho Chi Minh -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <img src="https://i.postimg.cc/mDCnMTRk/ho-chi-minh.jpg" class="img-fluid rounded-circle mb-3" style="max-width: 150px;" alt="Ho Chi Minh">
+                        <h4 class="card-title">{% if lang == 'vi' %}Chủ tịch Hồ Chí Minh{% else %}President Ho Chi Minh{% endif %}</h4>
+                        <p class="card-text">
+                            {% if lang == 'vi' %}
+                            Người sáng lập Đảng Cộng sản Việt Nam, Chủ tịch đầu tiên của nước Việt Nam Dân chủ Cộng hòa. Ông đã lãnh đạo cuộc đấu tranh giành độc lập, tự do cho dân tộc.
+                            {% else %}
+                            Founder of the Communist Party of Vietnam and the first President of the Democratic Republic of Vietnam. He led the struggle for independence and freedom of the Vietnamese people.
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Vo Nguyen Giap -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <img src="https://i.postimg.cc/YSvtdg9K/vo-nguyen-giap.jpg" class="img-fluid rounded-circle mb-3" style="max-width: 150px;" alt="Vo Nguyen Giap">
+                        <h4 class="card-title">{% if lang == 'vi' %}Đại tướng Võ Nguyên Giáp{% else %}General Vo Nguyen Giap{% endif %}</h4>
+                        <p class="card-text">
+                            {% if lang == 'vi' %}
+                            Vị tướng tài ba, người chỉ huy chiến thắng Điện Biên Phủ năm 1954 và nhiều chiến dịch quan trọng khác trong cuộc kháng chiến chống Pháp và chống Mỹ.
+                            {% else %}
+                            A talented general who commanded the victory at Dien Bien Phu in 1954 and many other important campaigns during the resistance against French and American forces.
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Van Tien Dung -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <img src="https://i.postimg.cc/9fXbJ7SR/van-tien-dung.jpg" class="img-fluid rounded-circle mb-3" style="max-width: 150px;" alt="Van Tien Dung">
+                        <h4 class="card-title">{% if lang == 'vi' %}Đại tướng Văn Tiến Dũng{% else %}General Van Tien Dung{% endif %}</h4>
+                        <p class="card-text">
+                            {% if lang == 'vi' %}
+                            Tổng Tư lệnh Chiến dịch Hồ Chí Minh, chỉ huy trực tiếp cuộc tổng tiến công và nổi dậy mùa Xuân 1975, giải phóng hoàn toàn Việt Nam.
+                            {% else %}
+                            Commander-in-Chief of the Ho Chi Minh Campaign, directly commanding the Spring 1975 Offensive that completely liberated Vietnam.
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-4 bg-danger text-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h3>{{ content[lang]['gallery_title'] }}</h3>
+                <p class="mb-md-0">{{ content[lang]['gallery_intro'] }}</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <a href="{{ url_for('gallery') }}" class="btn btn-outline-light">
+                    <i class="fas fa-images me-1"></i>{{ content[lang]['read_more'] }}
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/timeline.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- History Hero -->
+<section class="hero-section" style="padding: 3rem 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 mx-auto hero-content text-center">
+                <h1 class="display-5 fw-bold hero-animated">{{ content[lang]['history_title'] }}</h1>
+                <p class="lead hero-animated">{{ content[lang]['history_intro'] }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main History Content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <!-- Early History -->
+                <div class="mb-5 animate-on-scroll">
+                    <h2 class="mb-3 text-danger">
+                        <i class="fas fa-scroll me-2"></i>{{ content[lang]['early_history'] }}
+                    </h2>
+                    <p class="lead">{{ content[lang]['early_history_text'] }}</p>
+                    <p>
+                        {% if lang == 'vi' %}
+                        Sau Hiệp định Geneva năm 1954, Việt Nam bị chia cắt tạm thời tại vĩ tuyến 17. Miền Bắc do Đảng Lao động Việt Nam (sau này là Đảng Cộng sản Việt Nam) lãnh đạo với Chủ tịch Hồ Chí Minh. Vùng phía dưới vĩ tuyến 17 do chính quyền Việt Nam Cộng hòa điều hành, với sự hỗ trợ từ Hoa Kỳ. Hiệp định Geneva có điều khoản yêu cầu tổ chức bầu cử toàn quốc vào năm 1956 để thống nhất đất nước, nhưng cuộc bầu cử này đã không bao giờ diễn ra, dẫn đến sự kéo dài tình trạng chia cắt và cuối cùng là chiến tranh.
+                        {% else %}
+                        After the Geneva Accords of 1954, Vietnam was temporarily divided at the 17th parallel. The North was led by the Vietnam Workers' Party (later the Communist Party of Vietnam) with President Ho Chi Minh. The area below the 17th parallel was governed by the Republic of Vietnam administration, with support from the United States. The Geneva Accords included a provision requiring nationwide elections in 1956 to unify the country, but these elections never took place, leading to prolonged division and eventually war.
+                        {% endif %}
+                    </p>
+                    <div class="text-center my-4">
+                        <img src="{{ url_for('static', filename='images/geneva-accords.svg') }}" class="img-fluid rounded" alt="{% if lang == 'vi' %}Hiệp định Geneva 1954{% else %}Geneva Accords 1954{% endif %}">
+                    </div>
+                </div>
+                
+                <!-- War Period -->
+                <div class="mb-5 animate-on-scroll">
+                    <h2 class="mb-3 text-danger">
+                        <i class="fas fa-bomb me-2"></i>{{ content[lang]['war_period'] }}
+                    </h2>
+                    <p class="lead">{{ content[lang]['war_period_text'] }}</p>
+                    <p>
+                        {% if lang == 'vi' %}
+                        Cuộc chiến tranh Việt Nam kéo dài từ năm 1955 đến năm 1975 là một trong những cuộc xung đột quân sự lớn nhất sau Thế chiến II. Sự tham gia của Hoa Kỳ vào Việt Nam tăng dần từ vai trò cố vấn quân sự đến sự hiện diện quân sự toàn diện với hơn nửa triệu quân vào cuối những năm 1960. Cuộc Tổng tiến công Tết Mậu Thân năm 1968 đã tạo ra bước ngoặt trong cuộc chiến, dẫn đến sự thay đổi trong chính sách của Hoa Kỳ và cuối cùng là việc rút quân khỏi Việt Nam.
+                        {% else %}
+                        The Vietnam War, lasting from 1955 to 1975, was one of the largest military conflicts after World War II. U.S. involvement in Vietnam gradually increased from a military advisory role to full military presence with over half a million troops by the late 1960s. The Tet Offensive in 1968 marked a turning point in the war, leading to changes in U.S. policy and eventually the withdrawal of troops from Vietnam.
+                        {% endif %}
+                    </p>
+                    <div class="text-center my-4">
+                        <img src="{{ url_for('static', filename='images/us-troops.svg') }}" class="img-fluid rounded" alt="{% if lang == 'vi' %}Quân đội Hoa Kỳ tại Việt Nam{% else %}U.S. troops in Vietnam{% endif %}">
+                    </div>
+                </div>
+                
+                <!-- Ho Chi Minh Campaign -->
+                <div class="mb-5 animate-on-scroll">
+                    <h2 class="mb-3 text-danger">
+                        <i class="fas fa-flag me-2"></i>{{ content[lang]['ho_chi_minh_campaign'] }}
+                    </h2>
+                    <p class="lead">{{ content[lang]['ho_chi_minh_text'] }}</p>
+                    <p>
+                        {% if lang == 'vi' %}
+                        Chiến dịch Hồ Chí Minh là chiến dịch quân sự cuối cùng của Quân Giải phóng và Quân đội Nhân dân Việt Nam. Chiến dịch bắt đầu vào ngày 26 tháng 4 năm 1975 với mục tiêu chiếm Sài Gòn, thủ đô của Việt Nam Cộng hòa. Chiến dịch được đặt theo tên của Chủ tịch Hồ Chí Minh, người đã dẫn dắt cuộc đấu tranh giành độc lập cho Việt Nam. Chiến dịch Hồ Chí Minh là đỉnh cao của Chiến dịch Mùa Xuân 1975, một loạt các chiến dịch quân sự bắt đầu từ tháng 3 năm 1975.
+                        {% else %}
+                        The Ho Chi Minh Campaign was the final military campaign of the Liberation Army and the Vietnam People's Army. The campaign began on April 26, 1975, with the objective of capturing Saigon, the capital of the Republic of Vietnam. The campaign was named after President Ho Chi Minh, who had led Vietnam's struggle for independence. The Ho Chi Minh Campaign was the culmination of the Spring 1975 Offensive, a series of military campaigns that began in March 1975.
+                        {% endif %}
+                    </p>
+                    <div class="text-center my-4">
+                        <img src="{{ url_for('static', filename='images/ho-chi-minh-campaign.svg') }}" class="img-fluid rounded" alt="{% if lang == 'vi' %}Chiến dịch Hồ Chí Minh{% else %}Ho Chi Minh Campaign{% endif %}">
+                    </div>
+                </div>
+                
+                <!-- Liberation Day -->
+                <div class="mb-5 animate-on-scroll">
+                    <h2 class="mb-3 text-danger">
+                        <i class="fas fa-calendar-check me-2"></i>{{ content[lang]['liberation_day'] }}
+                    </h2>
+                    <p class="lead">{{ content[lang]['liberation_text'] }}</p>
+                    <p>
+                        {% if lang == 'vi' %}
+                        Vào sáng ngày 30 tháng 4 năm 1975, các đơn vị của Quân Giải phóng bắt đầu tiến vào Sài Gòn từ nhiều hướng. Lúc 10:45, xe tăng số hiệu 843 của Lữ đoàn Tăng 203 đã húc đổ cổng Dinh Độc Lập. Vào 11:30 sáng, quân đội cách mạng đã tiến vào Dinh Độc Lập, hạ cờ Việt Nam Cộng hòa và kéo lá cờ của Mặt trận Dân tộc Giải phóng miền Nam Việt Nam lên. Tổng thống Dương Văn Minh, người vừa mới nhậm chức ngày hôm trước, đã tuyên bố đầu hàng vô điều kiện, chính thức kết thúc sự tồn tại của chính quyền Việt Nam Cộng hòa.
+                        {% else %}
+                        On the morning of April 30, 1975, units of the Liberation Army began entering Saigon from multiple directions. At 10:45 AM, tank number 843 of the 203rd Tank Brigade broke through the gate of the Independence Palace. At 11:30 AM, revolutionary troops entered the Independence Palace, lowered the flag of the Republic of Vietnam, and raised the flag of the National Liberation Front. President Duong Van Minh, who had just taken office the day before, announced unconditional surrender, officially ending the existence of the Republic of Vietnam government.
+                        {% endif %}
+                    </p>
+                    <div class="text-center my-4">
+                        <img src="{{ url_for('static', filename='images/tank-palace.svg') }}" class="img-fluid rounded" alt="{% if lang == 'vi' %}Xe tăng tại Dinh Độc Lập{% else %}Tank at Independence Palace{% endif %}">
+                    </div>
+                </div>
+                
+                <!-- Reunification -->
+                <div class="mb-5 animate-on-scroll">
+                    <h2 class="mb-3 text-danger">
+                        <i class="fas fa-handshake me-2"></i>{{ content[lang]['reunification'] }}
+                    </h2>
+                    <p class="lead">{{ content[lang]['reunification_text'] }}</p>
+                    <p>
+                        {% if lang == 'vi' %}
+                        Sau ngày 30 tháng 4 năm 1975, khu vực này được đặt dưới sự quản lý của Chính phủ Cách mạng Lâm thời. Quá trình thống nhất chính trị diễn ra trong năm tiếp theo. Vào ngày 2 tháng 7 năm 1976, Quốc hội thống nhất đã tuyên bố thành lập Cộng hòa Xã hội Chủ nghĩa Việt Nam, với Hà Nội là thủ đô. Sài Gòn được đổi tên thành Thành phố Hồ Chí Minh để tưởng nhớ Chủ tịch Hồ Chí Minh. Ngày 30 tháng 4 trở thành ngày lễ quốc gia, được gọi là Ngày Giải phóng, thống nhất đất nước, hoặc ngắn gọn là Ngày Thống nhất.
+                        {% else %}
+                        After April 30, 1975, the area was placed under the administration of the Provisional Revolutionary Government. The process of political reunification took place over the following year. On July 2, 1976, the unified National Assembly declared the establishment of the Socialist Republic of Vietnam, with Hanoi as its capital. Saigon was renamed Ho Chi Minh City in honor of President Ho Chi Minh. April 30 became a national holiday, known as Liberation Day, National Reunification Day, or simply Reunification Day.
+                        {% endif %}
+                    </p>
+                    <div class="text-center my-4">
+                        <img src="{{ url_for('static', filename='images/reunification.svg') }}" class="img-fluid rounded" alt="{% if lang == 'vi' %}Lễ thống nhất đất nước{% else %}National Reunification Ceremony{% endif %}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-4 bg-danger text-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h3>{{ content[lang]['timeline_title'] }}</h3>
+                <p class="mb-md-0">{{ content[lang]['timeline_intro'] }}</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <a href="{{ url_for('timeline') }}" class="btn btn-outline-light">
+                    <i class="fas fa-clock me-1"></i>{{ content[lang]['read_more'] }}
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

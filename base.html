@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ content[lang]['site_title'] }}{% endblock %}</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+    
+    <!-- Animate.css for animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='svg/vietnam_flag.svg') }}" alt="Vietnam Flag" height="30" class="me-2">
+                <span>{{ content[lang]['site_title'] }}</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == url_for('index') %}active{% endif %}" href="{{ url_for('index') }}">
+                            <i class="fas fa-home me-1"></i>{{ content[lang]['home'] }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == url_for('history') %}active{% endif %}" href="{{ url_for('history') }}">
+                            <i class="fas fa-book me-1"></i>{{ content[lang]['history'] }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == url_for('timeline') %}active{% endif %}" href="{{ url_for('timeline') }}">
+                            <i class="fas fa-clock me-1"></i>{{ content[lang]['timeline'] }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == url_for('gallery') %}active{% endif %}" href="{{ url_for('gallery') }}">
+                            <i class="fas fa-images me-1"></i>{{ content[lang]['gallery'] }}
+                        </a>
+                    </li>
+                </ul>
+                <div class="language-selector dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-globe me-1"></i>{{ content[lang]['language'] }}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                        <li>
+                            <a class="dropdown-item {% if lang == 'vi' %}active{% endif %}" href="{{ url_for('set_language', lang='vi') }}">
+                                <span class="flag-icon">🇻🇳</span> {{ content[lang]['vietnamese'] }}
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {% if lang == 'en' %}active{% endif %}" href="{{ url_for('set_language', lang='en') }}">
+                                <span class="flag-icon">🇬🇧</span> {{ content[lang]['english'] }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>{{ content[lang]['site_title'] }}</h5>
+                    <p>{{ content[lang]['footer_text'] }}</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>{{ content[lang]['site_title'] }}</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ url_for('index') }}" class="text-white">{{ content[lang]['home'] }}</a></li>
+                        <li><a href="{{ url_for('history') }}" class="text-white">{{ content[lang]['history'] }}</a></li>
+                        <li><a href="{{ url_for('timeline') }}" class="text-white">{{ content[lang]['timeline'] }}</a></li>
+                        <li><a href="{{ url_for('gallery') }}" class="text-white">{{ content[lang]['gallery'] }}</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>{{ content[lang]['language'] }}</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ url_for('set_language', lang='vi') }}" class="text-white">🇻🇳 {{ content[lang]['vietnamese'] }}</a></li>
+                        <li><a href="{{ url_for('set_language', lang='en') }}" class="text-white">🇬🇧 {{ content[lang]['english'] }}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
